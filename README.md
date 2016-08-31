@@ -1,6 +1,12 @@
-fig
+freeze-gif
 ===
-Fig is a jQuery plugin that downloads only the first frame of an animated GIF, shows it as a static image, and plays the entire animation on mouse hover. Downloading only the first frame reduces the initial payload and makes pages load faster.
+Download and display only the first frame of an animated GIF.
+
+For when you want to display a static image from an animated GIF and don't want to use a backend service like GraphicsMagick to download the full GIF then extract the first frame or a frontend library like [buzzfeed/libgif-js](https://github.com/buzzfeed/libgif-js) to download the full GIF, parse it, and show the first frame.
+
+Works by downloading the GIF one part at a time, inspecting the bytes to look for an end of frame, and either stopping download and displaying first frame if reached, or continuing to download another chunk and repeat.
+
+Forked from [voxmedia/vax-fig](https://github.com/voxmedia/vax-fig) to remove Ruby and jQuery depencencies and to turn into an npm package.
 
 Usage
 ====
@@ -9,30 +15,11 @@ All GIFs on page must have a "data-src" attribute with the source URL. Do not in
 <img data-src="some.gif"/>
 ```
 
-Run the plugin:
-```
-$('img[data-src]').fig();
-```
-
-You can pass in options to change the overlay colors and text:
-```
-$('img[data-src]').fig({
-  overlayTextColor: "#ff0000",
-  overlayBackgroundColor: "#ffffff",
-  overlayText: "Play"
-});
-```
-
 Demo
 ====
-A Sinatra-based demo app has been included.
-- Run 'bundle install'
-- Run app with 'bundle exec ruby app.rb'
-- Visit http://0.0.0.0:4567 or http://0.0.0.0:4567/more?enabled=1
 
 Caveats
 ====
-- Images must be served from the same domain or have CORS headers
 - Probably will not work on older versions of IE
 
 ## Authors
@@ -40,10 +27,6 @@ Caveats
 - [@jesse](https://github.com/jesse)
 - GIF decoder borrowed from [@deanm](https://github.com/deanm)'s [omggif](https://github.com/deanm/omggif/blob/master/omggif.js) plugin
 - Base64 encoder borrowed from [n1k0](https://github.com/n1k0) via [http://stackoverflow.com/a/7372816](http://stackoverflow.com/a/7372816)
-
-## Contribute
-
-This is an active project and we encourage contributions. [Please review our guidelines and code of conduct before contributing.](https://github.com/voxmedia/open-source-contribution-guidelines)
 
 ## License 
 
