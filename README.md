@@ -1,4 +1,4 @@
-freeze-gif
+static-gif
 ===
 Download and display only the first frame of an animated GIF.
 
