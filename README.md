@@ -1,8 +1,10 @@
-static-gif
+preview-gif
 ===
 Download and display only the first frame of an animated GIF.
 
-For when you want to display a static image from an animated GIF and don't want to use a backend service like GraphicsMagick to download the full GIF then extract the first frame or a frontend library like [buzzfeed/libgif-js](https://github.com/buzzfeed/libgif-js) to download the full GIF, parse it, and show the first frame.
+Use when you want to display a static preview image of the first frame of an animated GIF on the frontend without downloading the whole GIF. 
+
+If that's all you want, it is potentially easier than solutions like using a backend service like GraphicsMagick to download the full GIF then extract the first frame or a frontend library like [buzzfeed/libgif-js](https://github.com/buzzfeed/libgif-js) to download the full GIF, parse it, and show the first frame.
 
 Works by downloading the GIF one part at a time, inspecting the bytes to look for an end of frame, and either stopping download and displaying first frame if reached, or continuing to download another chunk and repeat.
 
@@ -10,17 +12,26 @@ Forked from [voxmedia/vax-fig](https://github.com/voxmedia/vax-fig) to remove Ru
 
 Usage
 ====
-All GIFs on page must have a "data-src" attribute with the source URL. Do not include an actual "src" or else the browser will download the entire file, thus defeating the purpose of this plugin.
+All GIFs you want to display static on the page must have a "data-src" attribute with the source URL. Do not include an actual "src" or else the browser will download the entire file, thus defeating the purpose of this plugin.
 ```
-<img data-src="some.gif"/>
+<img data-src="some.gif" class="preview-gif" />
 ```
+
+Then, call:
+```
+PreviewGIF('.preview-gif');
+```
+
+where the argument passed to the function is a selector of the [document.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) format matching GIF <img> elements to preview. <img> elements that already have an `src` attribute; i.e. have already been processed by the PreviewGIF function, will be ignored. 
 
 Demo
 ====
 
+See `demo/index.html`.
+
 Caveats
 ====
-- Probably will not work on older versions of IE
+- Probably will not work on old versions of IE
 
 ## Authors
 
@@ -30,7 +41,7 @@ Caveats
 
 ## License 
 
-Copyright (c) 2014, Vox Media, Inc.
+Copyright (c) 2014, Vox Media, Inc. with modifications by Harrison Liddiard
 All rights reserved.
 
 BSD license
