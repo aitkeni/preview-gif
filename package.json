@@ -1,0 +1,28 @@
+{
+  "name": "preview-gif",
+  "version": "1.0.0",
+  "description": "Download and display only the first frame of an animated GIF.",
+  "main": "src/preview.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liddiard/preview-gif.git"
+  },
+  "keywords": [
+    "gif",
+    "animated",
+    "preview",
+    "first",
+    "frame",
+    "freeze",
+    "static"
+  ],
+  "author": "Harrison Liddiard <omniaura5@gmail.com> (http://harrisonliddiard.com)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/liddiard/preview-gif/issues"
+  },
+  "homepage": "https://github.com/liddiard/preview-gif#readme"
+}
