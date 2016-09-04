@@ -2,11 +2,13 @@
 <html>
   <head>
     <title>Demo</title>
-    <script src="../src/fig.js"></script>
+    <script src="../src/preview.js"></script>
   </head>
   <body>
+
     <h1>PreviewGIF demo</h1>
     <p>Click GIFs for original source</p>
+
     <main>
       <a href="img/1.gif" target="_blank">
         <img data-src="img/1.gif" />
@@ -25,8 +27,15 @@
       </a>
     </main>
 
+    <!-- DEMO SCRIPT USAGE BELOW -->
     <script>
-      PreviewGIF('main img');
+      var images = document.querySelectorAll('main img');
+      [].forEach.call(images, function(image) {
+        PreviewGIF(image.dataset.src, function(err, blob) {
+          if (err) console.error(err);
+          else image.src = blob;
+        });
+      });
     </script>
 
   </body>
