@@ -21,7 +21,7 @@ Install: `npm install preview-gif`
 
 ### Example
 
-#### HTML:
+#### HTML
 
 ```html
 <img data-src="some.gif" id="some-gif" />
@@ -30,7 +30,7 @@ Install: `npm install preview-gif`
      this tool -->
 ```
 
-#### JavaScript:
+#### JavaScript
 
 ```javascript
 const PreviewGIF = require('preview-gif');
@@ -61,8 +61,7 @@ Caveats
 
 ## License 
 
-Copyright (c) 2014, Vox Media, Inc. with modifications by Harrison Liddiard
-All rights reserved.
+Copyright (c) 2014, Vox Media, Inc. with modifications by Harrison Liddiard. All rights reserved.
 
 BSD license
 
