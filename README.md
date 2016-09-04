@@ -1,28 +1,47 @@
-preview-gif
-===
-Download and display only the first frame of an animated GIF.
+# preview-gif
 
-Use when you want to display a static preview image of the first frame of an animated GIF on the frontend without downloading the whole GIF. 
+Download and return image data for the first frame of an animated GIF.
 
-If that's all you want, it is potentially easier than solutions like using a backend service like GraphicsMagick to download the full GIF then extract the first frame or a frontend library like [buzzfeed/libgif-js](https://github.com/buzzfeed/libgif-js) to download the full GIF, parse it, and show the first frame.
+Use when you want to display a static preview image of the first frame of an animated GIF on the frontend without downloading the entire GIF. 
 
-Works by downloading the GIF one part at a time, inspecting the bytes to look for an end of frame, and either stopping download and displaying first frame if reached, or continuing to download another chunk and repeat.
+If you don't need to parse the whole GIF, this method is less complicated and faster than using a backend service like GraphicsMagick to download the full GIF and extract the first frame or using a frontend library like [buzzfeed/libgif-js](https://github.com/buzzfeed/libgif-js) to download and parse the full GIF, pause on the first frame.
+
+Works by downloading the GIF one part at a time, inspecting the bytes to look for an end of frame, and either stopping download and returning first frame data if reached, or continuing to download another chunk and repeat.
 
 Forked from [voxmedia/vax-fig](https://github.com/voxmedia/vax-fig) to remove Ruby and jQuery depencencies and to turn into an npm package.
 
-Usage
-====
-All GIFs you want to display static on the page must have a "data-src" attribute with the source URL. Do not include an actual "src" or else the browser will download the entire file, thus defeating the purpose of this plugin.
-```
-<img data-src="some.gif" class="preview-gif" />
+## Usage
+
+Install: `npm install preview-gif`
+
+`PreviewGIF` is a function that takes two parameters:
+
+1. URL of an animated GIF
+2. Callback function of the form `callback(err, imageData)`. `err` either `null` or an object with `type` and `message` properties. `imageData`, if there is no error, is a base64-encoded string of the first frame of image data that can be assigned directly to an image's `src` attribute to display it.
+
+### Example
+
+#### HTML:
+
+```html
+<img data-src="some.gif" id="some-gif" />
+<!-- Important! Don't put the GIF url in the `src` attribute, or the browser
+     will automatically download the full GIF which defeats the purpose of
+     this tool -->
 ```
 
-Then, call:
-```
-PreviewGIF('.preview-gif');
-```
+#### JavaScript:
 
-where the argument passed to the function is a selector of the [document.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) format matching GIF <img> elements to preview. <img> elements that already have an `src` attribute; i.e. have already been processed by the PreviewGIF function, will be ignored. 
+```javascript
+const PreviewGIF = require('preview-gif');
+
+const gif = document.getElementById('some-gif');
+
+PreviewGIF(gif.dataset.src, (err, imageData) => {
+  if (err) console.error(err);
+  else gif.src = imageData;
+});
+```
 
 Demo
 ====
@@ -31,13 +50,14 @@ See `demo/index.html`.
 
 Caveats
 ====
-- Probably will not work on old versions of IE
+- Probably will not work in old versions of IE.
 
 ## Authors
 
 - [@jesse](https://github.com/jesse)
 - GIF decoder borrowed from [@deanm](https://github.com/deanm)'s [omggif](https://github.com/deanm/omggif/blob/master/omggif.js) plugin
 - Base64 encoder borrowed from [n1k0](https://github.com/n1k0) via [http://stackoverflow.com/a/7372816](http://stackoverflow.com/a/7372816)
+- Core functionality extracted into an npm module that doesn't require jQuery by [@liddiard](https://github.com/liddiard)
 
 ## License 
 
