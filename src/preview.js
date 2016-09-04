@@ -260,7 +260,7 @@ function PreviewGIF(url, callback) {
     xhr.onerror = function() {
       callback({
         type: 'REQUEST_ERROR', 
-        message: 'Error requesting image from ' + url;
+        message: 'Error requesting image from ' + url
       });
     }
 
