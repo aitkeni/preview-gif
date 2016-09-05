@@ -272,5 +272,5 @@ function PreviewGIF(url, callback) {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = StaticGIF;
+  module.exports = PreviewGIF;
 }
